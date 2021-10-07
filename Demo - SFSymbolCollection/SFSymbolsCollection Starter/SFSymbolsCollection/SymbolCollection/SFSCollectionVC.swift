@@ -10,7 +10,13 @@ import UIKit
 class SFSCollectionVC: UIViewController {
     
     // TODO: Collection View
-    let collectionView: UICollectionView! = nil
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 30
+        layout.minimumInteritemSpacing = 30
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return cv
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +30,28 @@ class SFSCollectionVC: UIViewController {
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = false
         
+        collectionView.dataSource = self
+        
         // TODO: Delegate
+        
     }
 }
 
 // TODO: Data Source
+extension SFSCollectionVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return SymbolProvider.symbols.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //initalizing the count and populate data for the cell and return it
+        let symbol = SymbolProvider.symbols[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SFSCollectionCell.reuseIdentifier, for: indexPath) as! SFSCollectionCell
+        cell.symbol = symbol
+        
+        return cell
+    }
+}
 
 //extension SFSCollectionVC: UICollectionViewDelegateFlowLayout {
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

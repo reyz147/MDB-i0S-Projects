@@ -268,6 +268,7 @@ class MainVC: UIViewController {
         if (buttons[pressed].titleLabel!.text) == answer {
             hasbeenselected = true
             score += 1
+            print(score)
             mainStreak += 1
             buttons[pressed].backgroundColor = .systemGreen
             choices.append("Correct")
