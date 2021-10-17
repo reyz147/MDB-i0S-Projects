@@ -16,6 +16,8 @@ import Foundation
         Poison, Fighting, Psychic, Fire, Rock, Flying, Steel, Ghost, Water
 */
 
+//enum introduced and their definition is placed within {} and listed as case. Values defined in an enumeration are its enumeration cases. case keyword introduces new enumeration cases. each pokemon type is an enum case
+
 enum PokeType: String, CaseIterable {
     case Bug
     case Grass
